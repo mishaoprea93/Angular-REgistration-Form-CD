@@ -1,20 +1,122 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div id="wrapper">
+    <div id="head">
+        <h1>Registration Form!</h1>
+        <div class="alert alert-danger" *ngIf="flag==true">Thank you for registering with us {{users[users.length-1].firstName}}.We just sent you a confirmation email on {{users[users.length-1].email}},and we will send all mail to {{users[users.length-1].streetAddress}} {{users[users.length-1].city}}
+            {{users[users.length-1].state}}!
+        </div>
+    </div>
+    <div id="body">
+        <h3>Account Information!</h3>
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+            <p>*First Name:<input type="text" name="firstName" required minlength="4" maxlength="24" pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="user.firstName" #firstName='ngModel'></p>
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
 
+                <div *ngIf="firstName.errors.required">
+                    First Name is required.
+                </div>
+                <div *ngIf="firstName.errors.minlength">
+                    First Name must be at least 4 characters long.
+                </div>
+                <div *ngIf="firstName.errors.pattern">
+                    First Name should be letters only!
+                </div>
+
+            </div>
+            <p>*Last Name:<input type="text" name="lastName" required minlength="4" maxlength="24" pattern="[a-zA-Z][a-zA-Z ]+" [(ngModel)]="user.lastName" #lastName='ngModel'></p>
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
+
+                <div *ngIf="lastName.errors.required">
+                    Last Name is required.
+                </div>
+                <div *ngIf="lastName.errors.minlength">
+                    Last Name must be at least 4 characters long.
+                </div>
+                <div *ngIf="lastName.errors.pattern">
+                    Last Name should be letters only!
+                </div>
+
+            </div>
+
+            <p>*Email:<input type="text" name="email" required minlength="4" maxlength="24" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" [(ngModel)]="user.email" #email='ngModel'></p>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+
+                <div *ngIf="email.errors.required">
+                    Email is required.
+                </div>
+                <div *ngIf="email.errors.minlength">
+                    Email must be at least 4 characters long.
+                </div>
+                <div *ngIf="email.errors.pattern">
+                    Email is of invalid format!
+                </div>
+
+            </div>
+
+            <p>*Password:<input type="text" name="password" required minlength="16" maxlength="24" [(ngModel)]="user.password" #password='ngModel'></p>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+
+                <div *ngIf="password.errors.required">
+                    Password is required.
+                </div>
+                <div *ngIf="password.errors.minlength">
+                    Password must be at least 16 characters long.
+                </div>
+            </div>
+
+            <p>*Password-Confirmation:<input type="text" name="passwordConfirmation" equal="password" [(ngModel)]="user.passwordConfirmation" #passwordConfirmation='ngModel'></p>
+            <div *ngIf="passwordConfirmation.invalid && (passwordConfirmation.dirty || passwordConfirmation.touched)" class="alert alert-danger">
+
+                <div *ngIf="passwordConfirmation.errors.equal">
+                    Does not match the password!
+                </div>
+            </div>
+
+            <p>*Street:<input type="text" name="streetAddress" required minlength="4" maxlength="24" [(ngModel)]="user.streetAddress" #streetAddress='ngModel'></p>
+            <div *ngIf="streetAddress.invalid && (streetAddress.dirty || streetAddress.touched)" class="alert alert-danger">
+
+                <div *ngIf="streetAddress.errors.required">
+                    Street address is required.
+                </div>
+                <div *ngIf="streetAddress.errors.minlength">
+                    Street address must be at least 4 characters long.
+                </div>
+            </div>
+
+            <p>Unit:<input type="text" name="unit" [(ngModel)]="user.unit" #unit='ngModel'></p>
+
+            <p>*City:<input type="text" name="city" required minlength="4" maxlength="24" [(ngModel)]="user.city" #city='ngModel'></p>
+            <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
+
+                <div *ngIf="city.errors.required">
+                    City is required.
+                </div>
+                <div *ngIf="city.errors.minlength">
+                    City must be at least 4 characters long.
+                </div>
+            </div>
+
+            <p>*State:<select required [(ngModel)]="user.state" #state='ngModel'>
+              <option value="WA">WA</option>
+              <option value="IL">IL</option>
+              <option value="MT">MT</option>
+              <option value="AZ">AZ</option>
+              <option value="TX">TX</option>
+            </select></p>
+            <div *ngIf="state.invalid && (state.dirty || state.touched)" class="alert alert-danger">
+
+                <div *ngIf="state.errors.required">
+                    State is required.
+                </div>
+            </div>
+
+            <p>*I'am feeling lucky:<input type="radio" name="mood" value="Yes" required [(ngModel)]="user.mood" #mood='ngModel'>Yes<input type="radio" name="mood" value="No" required [(ngModel)]="user.mood" #mood='ngModel'>NO</p>
+            <div *ngIf="mood.invalid && (mood.dirty || mood.touched)" class="alert alert-danger">
+
+                <div *ngIf="mood.errors.required">
+                    Mood is required.
+                </div>
+            </div>
+            <p><input type="submit" value="Register" [disabled]="!myForm.form.valid"></p>
+        </form>
+    </div>
+</div>

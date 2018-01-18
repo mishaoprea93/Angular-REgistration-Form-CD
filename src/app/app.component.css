@@ -1,0 +1,32 @@
+#wrapper {
+    height: 900px;
+    width: 800px;
+    background-color: blanchedalmond;
+    outline: 1px dotted black;
+    margin: 50px auto;
+    text-align: center;
+}
+
+#head {
+    display: inline-block;
+    height: 10%;
+    width: 90%;
+    text-align: left;
+}
+
+#body {
+    width: 80%;
+    height: 80%;
+    display: inline-block;
+    outline: 1px solid black;
+    text-align: left;
+}
+
+form {
+    margin-left: 30px;
+    margin-top: 40px;
+}
+
+.error {
+    color: red;
+}
